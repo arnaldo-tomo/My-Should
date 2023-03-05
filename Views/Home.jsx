@@ -75,9 +75,7 @@ const Home = () => {
                 {App.nome}
             </Heading>
             <ScrollView>
-                <FlatList data={data} renderItem={({
-                    item
-                }) =>
+                <FlatList data={data} renderItem={({ item }) =>
                     <VStack p={2}  >
                         <Box borderRadius={6} shadow={6} bgColor={'white'} py="2">
                             <Text p={2} fontWeight="400" >
@@ -96,9 +94,7 @@ const Home = () => {
                 onSubmit={values => console.log(values)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
-
                     <View>
-
                         <FormControl>
                             <Input position={'absolute'} bottom={0} focusOutlineColor={'gray'} bgColor={'white'} bottom="5" borderRadius={20} height={12} shadow={2} left={4} width={270} placeholder="Writes Your's Ideia" onChangeText={handleChange('inputShould')}
                                 onBlur={handleBlur('inputShould')}
