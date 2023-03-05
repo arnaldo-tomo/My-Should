@@ -1,6 +1,12 @@
 const App = {
     nome: 'MyShould',
-    versao: 'V01'
+    APIURL: 'http://127.0.0.1:8000/',
+    versao: 'V01',
+
 }
 
-export default App;
+const input = {
+    inputShould: ' ',
+}
+
+export { App, input };
