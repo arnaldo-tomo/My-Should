@@ -1,10 +1,10 @@
 import { NativeBaseProvider, Text, HStack, Heading, FlatList, VStack, Spacer, Box, Input, FormControl, Fab, Icon } from 'native-base';
 import React from 'react';
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { ScrollView } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import { ScrollView, TouchableOpacity, Button, TextInput, View } from 'react-native';
 import axios from "axios";
-import App from '../config/App';
+import { Formik } from 'formik';
+import { App, input } from '../config/App';
 const Home = () => {
 
 
@@ -90,15 +90,26 @@ const Home = () => {
                 } keyExtractor={item => item.id} />
             </ScrollView>
 
-            <FormControl>
-                <Input position={'absolute'} bottom={0} focusOutlineColor={'gray'} bgColor={'white'} bottom="5" borderRadius={20} height={12} shadow={2} left={4} width={270} placeholder="Writes Your's Ideia" />
-            </FormControl>
+            <Formik
+                initialValues={{ input }}
 
+                onSubmit={values => console.log(values)}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
 
-            <Fab onPress={() => { console.log('Tthe tes is Run') }} renderInPortal={false} bottom={5} height={12} bgColor={'white'} icon={<Icon color="black" as={AntDesign} name="plus" size="4" />} />
+                    <View>
 
+                        <FormControl>
+                            <Input position={'absolute'} bottom={0} focusOutlineColor={'gray'} bgColor={'white'} bottom="5" borderRadius={20} height={12} shadow={2} left={4} width={270} placeholder="Writes Your's Ideia" onChangeText={handleChange('inputShould')}
+                                onBlur={handleBlur('inputShould')}
+                                value={values.inputShould} isRequired={true} />
+                        </FormControl>
 
-
+                        <Fab onPress={handleSubmit} renderInPortal={false} bottom={5} height={12} bgColor={'white'}
+                            icon={<Icon color="black" as={AntDesign} name="plus" size="4" />} />
+                    </View>
+                )}
+            </Formik>
 
         </NativeBaseProvider>
     )
