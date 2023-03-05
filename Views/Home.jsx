@@ -1,13 +1,19 @@
 import { NativeBaseProvider, Text, HStack, Heading, FlatList, VStack, Spacer, Box, Input, FormControl, Fab, Icon } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity, Button, TextInput, View } from 'react-native';
 import axios from "axios";
 import { Formik } from 'formik';
 import { App, input } from '../config/App';
 const Home = () => {
+    const [getAll, SetGetAll] = useState();
 
-
+    const GetData = () => {
+        axios.get()
+            .catch((response) => {
+                console.log(response.data)
+            })
+    }
     const data = [
         {
             id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -88,11 +94,14 @@ const Home = () => {
                 } keyExtractor={item => item.id} />
             </ScrollView>
 
-            <Formik
-                initialValues={{ input }}
+            <Formik initialValues={{ inputShould: '' }}
+                onSubmit={values => axios.post("http://127.0.0.1:8000/api/POSTShouls", values)
+                    .then((response) => {
+                        console.log(response.data.message)
+                    })
+                    .catch(() => { console.log(response.data.message) })
+                } >
 
-                onSubmit={values => console.log(values)}
-            >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
                         <FormControl>
