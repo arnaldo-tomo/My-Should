@@ -1,92 +1,58 @@
 import { NativeBaseProvider, Text, HStack, Heading, FlatList, VStack, Spacer, Box, Input, FormControl, Fab, Icon } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { ScrollView, TouchableOpacity, Button, TextInput, View } from 'react-native';
+import { ScrollView, TouchableOpacity, Button, TextInput, View, StyleSheet } from 'react-native';
 import axios from "axios";
 import { Formik } from 'formik';
 import { App, input } from '../config/App';
+import { login } from '../services/funcoes';
 const Home = () => {
     const [getAll, SetGetAll] = useState();
 
-    const GetData = () => {
-        axios.get()
+    function GetData() {
+        axios.get(App.APIURL + "GetAllShould")
+
+            .then((response) => {
+                console.log(response.data.message)
+                SetGetAll(response.data.should)
+
+            })
             .catch((response) => {
-                console.log(response.data)
+                console.log(response.data.message)
             })
     }
-    const data = [
-        {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-        , {
-            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        }
-    ]
 
+    useEffect(() => {
+        GetData();
+        login();
+    }, [])
+
+    const input = {
+        inputShould: ' ',
+    }
+
+    function clear() {
+        const input = {
+            inputShould: ' ',
+        }
+    }
+    const css4 = StyleSheet.create({
+        munhava: {
+            fontSize: 50,
+        }
+    });
     return (
         <NativeBaseProvider>
 
-            <Heading fontSize="xl" p="4" pb="3">
+            <Heading style={css4.munhava}  >
                 {App.nome}
             </Heading>
             <ScrollView>
-                <FlatList data={data} renderItem={({ item }) =>
+                <FlatList data={getAll} renderItem={({ item }) =>
                     <VStack p={2}  >
-                        <Box borderRadius={6} shadow={6} bgColor={'white'} py="2">
-                            <Text p={2} fontWeight="400" >
-                                Bengaluru (also called Bangalore) is the center of India's high-tech
-                                industry. The city is also known for its parks and nightlife.
+                        <Box borderRadius={6} shadow={6} bgColor={'white'} py="2" onPress={login()}>
+                            <Text p={2} fontWeight="400"  >
+                                {item.should}
                             </Text>
                         </Box>
                         <Spacer />
@@ -94,10 +60,12 @@ const Home = () => {
                 } keyExtractor={item => item.id} />
             </ScrollView>
 
-            <Formik initialValues={{ inputShould: '' }}
-                onSubmit={values => axios.post("http://127.0.0.1:8000/api/POSTShouls", values)
+            <Formik initialValues={{ input }}
+                onSubmit={values => axios.post(App.APIURL + "POSTShouls", values)
                     .then((response) => {
+                        clear()
                         console.log(response.data.message)
+                        GetData()
                     })
                     .catch(() => { console.log(response.data.message) })
                 } >
@@ -116,8 +84,10 @@ const Home = () => {
                 )}
             </Formik>
 
-        </NativeBaseProvider>
-    )
+        </NativeBaseProvider >
+    );
 }
+
+
 
 export default Home;
