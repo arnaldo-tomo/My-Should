@@ -36,15 +36,11 @@ const Home = () => {
             inputShould: ' ',
         }
     }
-    const css4 = StyleSheet.create({
-        munhava: {
-            fontSize: 50,
-        }
-    });
+
     return (
         <NativeBaseProvider>
 
-            <Heading style={css4.munhava}  >
+            <Heading fontSize="xl" p="4" pb="3" >
                 {App.nome}
             </Heading>
             <ScrollView>
