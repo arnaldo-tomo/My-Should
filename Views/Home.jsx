@@ -1,4 +1,4 @@
-import { NativeBaseProvider, Text, HStack, Heading, FlatList, VStack, Spacer, Box, Input, FormControl, Fab, Icon } from 'native-base';
+import { NativeBaseProvider, Text, HStack, Heading, FlatList, VStack, Spacer, Box, Input, FormControl, Fab, Icon, Switch } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity, Button, TextInput, View, StyleSheet } from 'react-native';
@@ -47,8 +47,16 @@ const Home = () => {
                 <FlatList data={getAll} renderItem={({ item }) =>
                     <VStack p={2}  >
                         <Box borderRadius={6} shadow={6} bgColor={'white'} py="2" onPress={login()}>
-                            <Text p={2} fontWeight="400"  >
-                                {item.should}
+                            <HStack p={2} fontWeight="400" alignItems="center" space={4}>
+
+                                <Text p={2} fontWeight="400"  >
+                                    {item.should}
+                                </Text>
+                            </HStack>;
+                            <Text fontSize="xs" _dark={{
+                                color: "warmGray.50"
+                            }} color="coolGray.800" alignSelf="flex-start">
+                                <Switch size="sm" />
                             </Text>
                         </Box>
                         <Spacer />
