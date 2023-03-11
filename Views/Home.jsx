@@ -70,7 +70,7 @@ const Home = ({ navigation }) => {
             <HStack justifyContent="space-between" p={4} pt={16} bgColor={'white'} >
                 <HStack>
                     <VStack>
-                        <Heading fontWeight={'extraBlack'} >
+                        <Heading fontWeight="black" >
                             {App.nome}
                         </Heading>
                         <Text>{new Date().toLocaleString()}</Text>
@@ -86,7 +86,7 @@ const Home = ({ navigation }) => {
 
             </HStack>
             <HStack p={2} bgColor={'white'}>
-                <Input placeholder="Procurar projectos" placeholderTextColor={'white'} variant="filled" shadow={6} color={'white'} bgColor={'blue.500'} width="100%" borderRadius="10" py="1" px="2" InputLeftElement={<Icon ml="2" size="4" color="white" as={<Ionicons name="ios-search" />} />} />
+                <Input placeholder="Procurar projectos" placeholderTextColor={'white'} variant="filled" color={'white'} bgColor={'blue.500'} width="100%" borderRadius="10" py="1" px="2" InputLeftElement={<Icon ml="2" size="4" color="white" as={<Ionicons name="ios-search" />} />} />
             </HStack>
 
             <HStack p={2} justifyContent={'space-between'} bgColor={'white'}>
