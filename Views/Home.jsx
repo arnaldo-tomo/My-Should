@@ -6,9 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity, View, StyleSheet } from 'react-native';
 import axios from "axios";
-import { Formik } from 'formik';
 import { App, input } from '../config/App';
-import { login } from '../services/funcoes';
 const Home = ({ navigation }) => {
     const {
         isOpen,
@@ -17,7 +15,7 @@ const Home = ({ navigation }) => {
     } = useDisclose();
     const [getAll, SetGetAll] = useState();
 
-    function GetData() {
+    const GetData = () => {
         axios.get(App.APIURL + "GetAllShould")
 
             .then((response) => {
@@ -31,9 +29,6 @@ const Home = ({ navigation }) => {
         GetData();
     }, [])
 
-    const input = {
-        inputShould: ' ',
-    }
 
 
     return (
@@ -43,19 +38,6 @@ const Home = ({ navigation }) => {
                 <Actionsheet.Content height={500} bgColor={'white'} _dragIndicator={{
                     bg: 'blue.500'
                 }}>
-
-                    <Formik initialValues={{ input }}
-                        onSubmit={values => axios.post(App.APIURL + "POSTShouls", values)
-                            .then((response) => {
-                                GetData()
-                            })
-                        } >
-
-                        {({ handleChange, handleBlur, handleSubmit, values }) => (
-                            <></>
-                        )}
-                    </Formik>
-
                     <Box w="100%" h={60} px={4} justifyContent="center">
                         <Text fontSize="16" color="gray.500" _dark={{
                             color: "gray.300"
