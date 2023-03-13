@@ -27,6 +27,7 @@ const Home = ({ navigation }) => {
 
     useEffect(() => {
         GetData();
+
     }, [])
 
 
@@ -35,14 +36,15 @@ const Home = ({ navigation }) => {
         <NativeBaseProvider>
 
             <Actionsheet isOpen={isOpen} onClose={onClose} disableOverlay>
-                <Actionsheet.Content height={500} bgColor={'white'} _dragIndicator={{
-                    bg: 'blue.500'
+                <Actionsheet.Content height={500} bgColor={'white'} bgcolor={'blue.200'} shadow={10} _dragIndicator={{
+                    bg: 'red.500',
+
                 }}>
                     <Box w="100%" h={60} px={4} justifyContent="center">
                         <Text fontSize="16" color="gray.500" _dark={{
                             color: "gray.300"
                         }}>
-                            Albums
+
                         </Text>
                     </Box>
 
