@@ -15,23 +15,29 @@ export default function Post({ navigation }) {
                     Criar Notas
                 </Heading>
                 <Formik initialValues={{ input }}
-                    onSubmit={values => axios.get(App.APIURL + "POSTShouls", values)
+                    onSubmit={values => axios.post(App.APIURL + 'POSTShouls', values)
                         .then((response) => {
-                            GetData();
+                            console.log(response.data.message)
                             navigation.push('Home');
+
+                        })
+
+                        .catch(() => {
+                            console.log(response.data.message)
+                            alert(response.data.message)
                         })
                     } >
 
                     {({ handleChange, handleBlur, handleSubmit, values }) => (
 
-                        <VStack space={4}>
-                            <Input onChangeText={handleChange('inputShould')} onBlur={handleBlur('inputShould')} value={values.inputShould} bgColor={'white'} w="100%" maxW="350px" mx="auto" variant="outline" placeholder="Titulo da Nota" pb={4} />
+                        <VStack space={4} paddingLeft="4" pr={4} >
+                            <Input onChangeText={handleChange('inputShould')} onBlur={handleBlur('inputShould')} value={values.inputShould} bgColor={'white'} variant="outline" placeholder="Titulo da Nota" pb={4} />
 
-                            <Input onChangeText={handleChange('lingauem')} onBlur={handleBlur('lingauem')} value={values.lingauem} bgColor={'white'} w="100%" maxW="350px" mx="auto" variant="outline" placeholder="Outline" pb={4} />
+                            <Input onChangeText={handleChange('lingauem')} onBlur={handleBlur('lingauem')} value={values.lingauem} bgColor={'white'} variant="outline" placeholder="Outline" pb={4} />
 
-                            <TextArea onChangeText={handleChange('descricao')} onBlur={handleBlur('descricao')} value={values.descricao} bgColor={'white'} placeholder="Text Area Placeholder" h="50%" w="400%" maxW="350px" mx="auto" />
+                            <TextArea h="50%" maxh="300" onChangeText={handleChange('descricao')} onBlur={handleBlur('descricao')} value={values.descricao} bgColor={'white'} placeholder="Text Area Placeholder" />
 
-                            <Button onPress={handleSubmit} shadow={6} w="100%" maxW="350px" mx="auto" bgColor={'blue.500'}>Criar</Button>
+                            <Button onPress={handleSubmit} shadow={6} height={50} bgColor={'blue.500'}>Criar</Button>
                         </VStack>
                     )}
                 </Formik>
