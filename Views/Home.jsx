@@ -1,12 +1,14 @@
 import {
     NativeBaseProvider, Text, HStack, Heading, FlatList,
-    VStack, Spacer, Box, Input, Badge, Fab, Icon, Switch, Actionsheet, Center, useDisclose, Stack, Button
+    VStack, Spacer, Box, Input, Badge, Fab, Icon, TextArea, Actionsheet, Center, useDisclose, Stack, Button
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity, View, StyleSheet } from 'react-native';
 import axios from "axios";
+import { Formik } from 'formik';
 import { App, input } from '../config/App';
+const css = StyleSheet.create({ input: { with: 100, maxW: 350, mx: "auto", bgColor: "white" } })
 const Home = ({ navigation }) => {
     const {
         isOpen,
@@ -40,24 +42,48 @@ const Home = ({ navigation }) => {
                     bg: 'red.500',
 
                 }}>
-                    <Box w="100%" h={60} px={4} justifyContent="center">
-                        <Text fontSize="16" color="gray.500" _dark={{
-                            color: "gray.300"
-                        }}>
 
-                        </Text>
-                    </Box>
 
-                    <Actionsheet.Item onPress={onClose}>Cancel</Actionsheet.Item>
+
+                    <Formik initialValues={{ input }}
+                        onSubmit={values => axios.post(App.APIURL + 'POSTShouls', values)
+                            .then((response) => {
+                                console.log(response.data.message)
+                                navigation.push('Home');
+
+                            })
+
+                            .catch(() => {
+                                console.log(response.data.message)
+                                alert(response.data.message)
+                            })
+                        } >
+
+                        {({ handleChange, handleBlur, handleSubmit, values }) => (
+
+                            <VStack space={4} w="100%" >
+                                <Input onChangeText={handleChange('inputShould')} onBlur={handleBlur('inputShould')} value={values.inputShould} bgColor={'white'} variant="outline" placeholder="Titulo da Nota" pb={4} />
+
+                                <Input onChangeText={handleChange('lingauem')} onBlur={handleBlur('lingauem')} value={values.lingauem} bgColor={'white'} variant="outline" placeholder="Outline" pb={4} />
+
+                                <TextArea h="50%" onChangeText={handleChange('descricao')} onBlur={handleBlur('descricao')} value={values.descricao} bgColor={'white'} placeholder="Text Area Placeholder" />
+
+                                <Button onPress={handleSubmit} shadow={6} height={10} bgColor={'gray.900'}>Criar</Button>
+                            </VStack>
+                        )}
+                    </Formik>
+
+                    {/* <Actionsheet.Item onPress={onClose}>Cancel</Actionsheet.Item> */}
                 </Actionsheet.Content>
             </Actionsheet>
+
             <HStack justifyContent="space-between" p={4} pt={16} bgColor={'white'} >
                 <HStack>
                     <VStack>
-                        <Heading fontWeight="black" >
+                        <Heading fontWeight="bold" >
                             {App.nome}
                         </Heading>
-                        <Text>{new Date().toLocaleString()}</Text>
+                        <Text fontWeight={'medium'}>{new Date().toLocaleString()}</Text>
                     </VStack>
 
                 </HStack>
@@ -69,14 +95,15 @@ const Home = ({ navigation }) => {
                 </HStack>
 
             </HStack>
+
             <HStack p={2} bgColor={'white'}>
-                <Input placeholder="Procurar projectos" placeholderTextColor={'white'} variant="filled" color={'white'} bgColor={'blue.500'} width="100%" borderRadius="10" py="1" px="2" InputLeftElement={<Icon ml="2" size="4" color="white" as={<Ionicons name="ios-search" />} />} />
+                <Input placeholder="Procurar projectos" placeholderTextColor={'white'} variant="filled" color={'white'} bgColor={'blue.500'} height="12" width="100%" borderRadius="6" py="1" px="2" InputLeftElement={<Icon ml="2" size="5" color="white" as={<Ionicons name="ios-search" />} />} />
             </HStack>
 
             <HStack p={2} justifyContent={'space-between'} bgColor={'white'}>
                 <VStack>
                     <Badge // bg="red.400"
-                        colorScheme="danger" rounded="full" mb={-4} mr={-4} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
+                        colorScheme="danger" rounded="full" mb={-4} mr={-3} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
                             fontSize: 12
                         }}>
                         5
@@ -93,7 +120,7 @@ const Home = ({ navigation }) => {
                 </VStack>
                 <VStack>
                     <Badge // bg="red.400"
-                        colorScheme="danger" rounded="full" mb={-4} mr={-4} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
+                        colorScheme="danger" rounded="full" mb={-4} mr={-3} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
                             fontSize: 12
                         }}>
                         2
@@ -108,9 +135,9 @@ const Home = ({ navigation }) => {
                         Pendentes
                     </Button>
                 </VStack>
-                <VStack pr={2}>
+                <VStack >
                     <Badge // bg="red.400"
-                        colorScheme="danger" rounded="full" mb={-4} mr={-4} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
+                        colorScheme="danger" rounded="full" mb={-4} mr={-1} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
                             fontSize: 12
                         }}>
                         2
@@ -128,8 +155,7 @@ const Home = ({ navigation }) => {
             </HStack>
 
 
-            <Fab onPress={() => navigation.push('Post')} renderInPortal={false} bottom={5} bgColor={'white'}
-                icon={<Icon color="black" as={AntDesign} name="plus" size="8" />} bgcolor="black" />
+
             <ScrollView>
 
                 <View bgColor={'white'}>
@@ -138,9 +164,9 @@ const Home = ({ navigation }) => {
                     <FlatList data={getAll} renderItem={({ item }) =>
 
 
-                        <TouchableOpacity onPress={onOpen}>
-                            <VStack p={2}  >
+                        <VStack p={2}  >
 
+                            <TouchableOpacity onPress={() => navigation.navigate('Post', item)} >
                                 <Box borderRadius={6} shadow={6} bgColor={'white'} py="2" >
 
                                     <HStack p={1} fontWeight="400" alignItems="center" space={4}>
@@ -154,15 +180,16 @@ const Home = ({ navigation }) => {
                                     </HStack>
 
                                 </Box>
-                                <Spacer />
-                            </VStack>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                            <Spacer />
+                        </VStack>
 
 
                     } keyExtractor={item => item.id} />
                 </View>
             </ScrollView>
-
+            <Fab onPress={() => onOpen()} renderInPortal={false} bottom={5} bgColor={'white'}
+                icon={<Icon color="black" as={AntDesign} name="plus" size="8" />} bgcolor="black" />
 
         </NativeBaseProvider >
     );
