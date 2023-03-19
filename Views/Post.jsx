@@ -1,5 +1,6 @@
-import { HStack, Switch, Text, Stack, VStack, Input, Heading, Radio, TextArea, Box, Button, View, FormControl, Select, Center, CheckIcon, WarningOutlineIcon, NativeBaseProvider } from "native-base";
+import { HStack, Image, Text, Stack, VStack, Input, Heading, Radio, TextArea, Box, Button, View, FormControl, Select, Center, CheckIcon, WarningOutlineIcon, NativeBaseProvider } from "native-base";
 import React from "react";
+import Ionic from '@expo/vector-icons';
 import axios from "axios";
 import { Formik } from 'formik';
 import { GetData } from './Home';
@@ -12,15 +13,18 @@ export default function Post({ navigation, route }) {
     const { id, should, lingauem, descricao } = route.params;
     return (
         <NativeBaseProvider>
-            <Stack flex={1} bgcolor={'white'} space={4} pb={4}  >
-                <Heading pt={8} p={4} maxW="350px">
-                    {id} :
-                    {should}:
-                    {lingauem}:
-                    {descricao}:
-                </Heading>
+            <Stack flex={1}>
+                <Image flex={1} h="sm" w={'sm'} source={require('./b.jpg')} alt="logo" />
 
             </Stack>
+            <VStack bgcolor={'white'}>
+                <Box height={'50'} bgColor={'white'} borderTopRadius={"sm"} >
+
+                    <Heading padding={'2'}>{should}</Heading>
+
+                </Box>
+
+            </VStack>
         </NativeBaseProvider >
     )
 }
