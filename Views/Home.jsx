@@ -37,45 +37,7 @@ const Home = ({ navigation }) => {
     return (
         <NativeBaseProvider>
 
-            <Actionsheet isOpen={isOpen} onClose={onClose} disableOverlay>
-                <Actionsheet.Content height={500} bgColor={'white'} bgcolor={'blue.200'} shadow={10} _dragIndicator={{
-                    bg: 'red.500',
 
-                }}>
-
-
-
-                    <Formik initialValues={{ input }}
-                        onSubmit={values => axios.post(App.APIURL + 'POSTShouls', values)
-                            .then((response) => {
-                                console.log(response.data.message)
-                                navigation.push('Home');
-
-                            })
-
-                            .catch(() => {
-                                console.log(response.data.message)
-                                alert(response.data.message)
-                            })
-                        } >
-
-                        {({ handleChange, handleBlur, handleSubmit, values }) => (
-
-                            <VStack space={4} w="100%" >
-                                <Input onChangeText={handleChange('inputShould')} onBlur={handleBlur('inputShould')} value={values.inputShould} bgColor={'white'} variant="outline" placeholder="Titulo da Nota" pb={4} />
-
-                                <Input onChangeText={handleChange('lingauem')} onBlur={handleBlur('lingauem')} value={values.lingauem} bgColor={'white'} variant="outline" placeholder="Outline" pb={4} />
-
-                                <TextArea h="50%" onChangeText={handleChange('descricao')} onBlur={handleBlur('descricao')} value={values.descricao} bgColor={'white'} placeholder="Text Area Placeholder" />
-
-                                <Button onPress={handleSubmit} shadow={6} height={10} bgColor={'gray.900'}>Criar</Button>
-                            </VStack>
-                        )}
-                    </Formik>
-
-                    {/* <Actionsheet.Item onPress={onClose}>Cancel</Actionsheet.Item> */}
-                </Actionsheet.Content>
-            </Actionsheet>
 
             <HStack justifyContent="space-between" p={4} pt={16} bgColor={'white'} >
                 <HStack>
@@ -165,16 +127,18 @@ const Home = ({ navigation }) => {
 
 
                         <VStack p={2}  >
-
                             <TouchableOpacity onPress={() => navigation.navigate('Post', item)} >
-                                <Box borderRadius={6} shadow={6} bgColor={'white'} py="2" >
 
-                                    <HStack p={1} fontWeight="400" alignItems="center" space={4}>
+                                <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
+
+                                    <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
                                         <Stack flex="1" p="2" justifyContent="space-around">
                                             <Stack space="2">
-                                                <Heading size="md" ml="-1">
+                                                <Heading size="sm" ml="-1">
                                                     {item.should}
                                                 </Heading>
+                                                <Text fontWeight={'light'}>{item.created_at}</Text>
+
                                             </Stack>
                                         </Stack>
                                     </HStack>
