@@ -10,7 +10,7 @@ const Router = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-                <Stack.Screen name="Post" component={Post} />
+                <Stack.Screen name="Post" component={Post} options={{ title: 'Voltar', headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
