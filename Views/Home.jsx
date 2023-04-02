@@ -15,6 +15,7 @@ const Home = ({ navigation }) => {
         onOpen,
         onClose
     } = useDisclose();
+
     const [getAll, SetGetAll] = useState();
 
     const GetData = () => {
@@ -22,6 +23,7 @@ const Home = ({ navigation }) => {
 
             .then((response) => {
                 SetGetAll(response.data.should)
+                console.log(response.data.should)
 
             })
 
@@ -29,7 +31,6 @@ const Home = ({ navigation }) => {
 
     useEffect(() => {
         GetData();
-
     }, [])
 
 
@@ -152,8 +153,8 @@ const Home = ({ navigation }) => {
                     } keyExtractor={item => item.id} />
                 </View>
             </ScrollView>
-            <Fab onPress={() => onOpen()} renderInPortal={false} bottom={5} bgColor={'white'}
-                icon={<Icon color="black" as={AntDesign} name="plus" size="8" />} bgcolor="black" />
+            <Fab shadow={'9'} onPress={() => onOpen()} renderInPortal={false} bottom={5} bgColor={'blue.400'}
+                icon={<Icon color="white" as={AntDesign} name="plus" size="8" />} />
 
         </NativeBaseProvider >
     );
