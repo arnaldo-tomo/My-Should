@@ -13,10 +13,7 @@ export default function Post({ navigation, route }) {
     const { id, should, lingauem, descricao } = route.params;
     return (
         <NativeBaseProvider>
-            <Stack flex={1}>
-                <Image flex={1} h="sm" w={'sm'} source={require('./b.jpg')} alt="logo" />
 
-            </Stack>
             <VStack bgcolor={'white'}>
                 <Box height={'50'} bgColor={'white'} borderTopRadius={"sm"} >
 
