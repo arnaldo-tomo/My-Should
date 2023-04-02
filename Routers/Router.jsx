@@ -6,6 +6,7 @@ import Home from '../Views/Home';
 import Post from '../Views/Post';
 import { Center, VStack, HStack, NativeBaseProvider, Button, Heading, Box } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
+import detaltes from '../Views/detalhes';
 
 const load = ({ navigation }) => {
     return (
@@ -38,8 +39,9 @@ const Router = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="load" component={load} options={{ headerShown: false }} />
+                <Stack.Screen name="Detalhes" component={detaltes} />
+                <Stack.Screen name="Post" component={Post} options={{ headerBlurEffect: true }} />
                 <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-                <Stack.Screen name="Post" component={Post} options={{ title: 'Voltar', headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
