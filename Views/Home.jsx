@@ -11,15 +11,22 @@ import { App, input } from '../config/App';
 
 const Home = ({ navigation }) => {
 
-    const [getAll, SetGetAll] = useState();
+    const [getAll, SetGetAll] = useState(true);
 
-    const GetData = () => {
-        axios.get(App.APIURL + "GetAllShould")
-            .then((response) => { SetGetAll(response.data.should) })
-    }
 
     useEffect(() => {
+
+        const GetData = () => {
+            axios.get(App.APIURL + "GetAllShould")
+                .then((response) => {
+                    SetGetAll(response.data.should)
+                })
+        }
+
         GetData();
+        SetGetAll(false);
+
+
     }, [])
 
     return (
@@ -101,39 +108,41 @@ const Home = ({ navigation }) => {
                     </Button>
                 </VStack>
             </HStack>
+            {getAll ? (
+                <Text>Carregando.....</Text>
+            ) : (
 
-            <View bgColor={'white'}>
                 <FlatList data={getAll} renderItem={({ item }) =>
-                    <TouchableOpacity onPress={() => navigation.navigate('Post', item)}>
+                    <View bgColor={'white'}>
 
                         <VStack p={2}  >
                             <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
-                                <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
-                                    <Stack flex="1" p="2" justifyContent="space-around">
-                                        <Stack space="2">
-                                            <Heading size="sm" ml="-1">
-                                                {item.should}
-                                            </Heading>
-                                            <Text fontWeight={'light'}>{item.created_at}</Text>
+                                <TouchableOpacity onPress={() => navigation.navigate('Post', item)}>
+                                    <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
+                                        <Stack flex="1" p="2" justifyContent="space-around">
+                                            <Stack space="2">
+                                                <Heading size="sm" ml="-1">
+                                                    {item.should}
+                                                </Heading>
+                                                <Text fontWeight={'light'}>{item.created_at}</Text>
 
+                                            </Stack>
                                         </Stack>
-                                    </Stack>
-                                </HStack>
+                                    </HStack>
+                                </TouchableOpacity>
 
                             </Box>
                             <Spacer />
                         </VStack>
-                    </TouchableOpacity>
+                    </View>
                 } keyExtractor={item => item.id} />
-            </View>
-
-            <Fab shadow={'9'} onPress={() => onOpen()} renderInPortal={false} bottom={5} bgColor={'blue.400'}
+            )}
+            < Fab shadow={'9'} renderInPortal={false} bottom={5} bgColor={'blue.400'}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="8" />} />
+
 
         </NativeBaseProvider >
     );
 }
-
-
 
 export default Home;
