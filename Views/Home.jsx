@@ -19,14 +19,9 @@ const Home = ({ navigation }) => {
     const [getAll, SetGetAll] = useState();
 
     const GetData = () => {
+
         axios.get(App.APIURL + "GetAllShould")
-
-            .then((response) => {
-                SetGetAll(response.data.should)
-                console.log(response.data.should)
-
-            })
-
+            .then((response) => { SetGetAll(response.data.should) })
     }
 
     useEffect(() => {
