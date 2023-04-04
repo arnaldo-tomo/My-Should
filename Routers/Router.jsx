@@ -1,24 +1,18 @@
-import * as React from 'react';
-import { View, Text, SafeAreaView, Image } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../Views/Home';
 import Post from '../Views/Post';
-import { Center, VStack, HStack, NativeBaseProvider, Button, Heading, Box } from 'native-base';
-import { Ionicons } from '@expo/vector-icons';
 import detaltes from '../Views/detalhes';
 import loading from '../Views/loading';
 
-
-
 const Router = () => {
+
     const Stack = createNativeStackNavigator();
 
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                initialRouteName='carregameto'
-            >
+            <Stack.Navigator initialRouteName='carregameto' >
                 <Stack.Screen name="carregameto" component={loading} options={{ headerShown: false }} />
                 <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
                 {/* <Stack.Screen name="Detalhes" component={detaltes} /> */}
