@@ -10,13 +10,14 @@ const Loading = ({ navigation }) => {
         navigation.navigate('Home')
     }
 
-    useEffect(() => {
-        async function checkLoginStatus() {
-            const token = await AsyncStorage.getItem('logado');
-            if (token) {
-                navigation.push('Home')
-            }
+    async function checkLoginStatus() {
+        const token = await AsyncStorage.getItem('logado');
+        if (token) {
+            navigation.push('Home')
         }
+    }
+
+    useEffect(() => {
         checkLoginStatus();
     }, [])
 
@@ -39,7 +40,7 @@ const Loading = ({ navigation }) => {
                     <Text style={{ textAlign: 'center', padding: 2 }}>O site Tenor.com foi traduzido com base na definição de idioma do navegador. Se quiser alterar o idioma</Text>
 
                 </Center>
-                <Button style={{ alignSelf: 'center' }} onPress={navigation.navigate('Home')}
+                <Button style={{ alignSelf: 'center' }} onPress={fetchUserData}
                     position={'absolute'} bottom={50} shadow={'6'} width={"300"} bgColor={'blue.400'}>
                     Get-Start
                 </Button>
