@@ -1,6 +1,6 @@
 import {
     NativeBaseProvider, Text, HStack, Heading, FlatList,
-    VStack, Spacer, Box, Input, Badge, Fab, Icon, TextArea, Actionsheet, Center, useDisclose, Stack, Button, Pressable
+    VStack, Spacer, Box, Input, Badge, Fab, Icon, TextArea, Actionsheet, Center, Skeleton, Stack, Button, Pressable
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
@@ -108,35 +108,33 @@ const Home = ({ navigation }) => {
                     </Button>
                 </VStack>
             </HStack>
-            {getAll ? (
-                <Text>Carregando.....</Text>
-            ) : (
 
-                <FlatList data={getAll} renderItem={({ item }) =>
-                    <View bgColor={'white'}>
 
-                        <VStack p={2}  >
-                            <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
-                                <TouchableOpacity onPress={() => navigation.navigate('Post', item)}>
-                                    <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
-                                        <Stack flex="1" p="2" justifyContent="space-around">
-                                            <Stack space="2">
-                                                <Heading size="sm" ml="-1">
-                                                    {item.should}
-                                                </Heading>
-                                                <Text fontWeight={'light'}>{item.created_at}</Text>
+            <FlatList data={getAll} renderItem={({ item }) =>
+                <View bgColor={'white'}>
 
-                                            </Stack>
+                    <VStack p={2}  >
+                        <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
+                            <TouchableOpacity onPress={() => navigation.navigate('Post', item)}>
+                                <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
+                                    <Stack flex="1" p="2" justifyContent="space-around">
+                                        <Stack space="2">
+                                            <Heading size="sm" ml="-1">
+                                                {item.should}
+                                            </Heading>
+                                            <Text fontWeight={'light'}>{item.created_at}</Text>
+
                                         </Stack>
-                                    </HStack>
-                                </TouchableOpacity>
+                                    </Stack>
+                                </HStack>
+                            </TouchableOpacity>
 
-                            </Box>
-                            <Spacer />
-                        </VStack>
-                    </View>
-                } keyExtractor={item => item.id} />
-            )}
+                        </Box>
+                        <Spacer />
+                    </VStack>
+                </View>
+            } keyExtractor={item => item.id} />
+
             < Fab shadow={'9'} renderInPortal={false} bottom={5} bgColor={'blue.400'}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="8" />} />
 
