@@ -16,7 +16,7 @@ export default function Post({ navigation, route }) {
     return (
         <NativeBaseProvider>
             <VStack bgcolor={'white'}>
-                <Box height={'50'} bgColor={'white'} borderTopRadius={"sm"} >
+                <Box bgColor={'white'} height="full" >
 
                     <Heading padding={'2'}>{should}</Heading>
 
