@@ -6,14 +6,17 @@ const Loading = ({ navigation }) => {
 
     const fetchUserData = () => {
         var nado = "logado";
-        const info = AsyncStorage.setItem('logado', nado)
-        navigation.navigate('Home')
+        const info = AsyncStorage.setItem('logado', nado);
+        // navigation.navigate('Home');
+        console.log('fetchUserData');
     }
 
     async function checkLoginStatus() {
         const token = await AsyncStorage.getItem('logado');
         if (token) {
-            navigation.push('Home')
+            // navigation.push('Home')
+            console.log('checkLoginStatus');
+
         }
     }
 
