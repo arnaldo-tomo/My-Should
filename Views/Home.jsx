@@ -1,6 +1,6 @@
 import {
     NativeBaseProvider, Text, HStack, Heading, FlatList,
-    VStack, Spacer, Box, Input, Badge, Fab, Icon, TextArea, Actionsheet, Center, useDisclose, Stack, Button
+    VStack, Spacer, Box, Input, Badge, Fab, Icon, TextArea, Actionsheet, Center, useDisclose, Stack, Button, Pressable
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
@@ -8,18 +8,12 @@ import { ScrollView, TouchableOpacity, View, StyleSheet } from 'react-native';
 import axios from "axios";
 import { Formik } from 'formik';
 import { App, input } from '../config/App';
-const css = StyleSheet.create({ input: { with: 100, maxW: 350, mx: "auto", bgColor: "white" } })
+
 const Home = ({ navigation }) => {
-    const {
-        isOpen,
-        onOpen,
-        onClose
-    } = useDisclose();
 
     const [getAll, SetGetAll] = useState();
 
     const GetData = () => {
-
         axios.get(App.APIURL + "GetAllShould")
             .then((response) => { SetGetAll(response.data.should) })
     }
@@ -28,12 +22,8 @@ const Home = ({ navigation }) => {
         GetData();
     }, [])
 
-
-
     return (
         <NativeBaseProvider>
-
-
 
             <HStack justifyContent="space-between" p={4} pt={16} bgColor={'white'} >
                 <HStack>
@@ -112,17 +102,12 @@ const Home = ({ navigation }) => {
                 </VStack>
             </HStack>
 
-
-
-
-
             <View bgColor={'white'}>
                 <FlatList data={getAll} renderItem={({ item }) =>
-                    <VStack p={2}  >
-                        <TouchableOpacity onPress={() => navigation.navigate('Post', item)} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Post', item)}>
 
+                        <VStack p={2}  >
                             <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
-
                                 <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
                                     <Stack flex="1" p="2" justifyContent="space-around">
                                         <Stack space="2">
@@ -136,11 +121,9 @@ const Home = ({ navigation }) => {
                                 </HStack>
 
                             </Box>
-                        </TouchableOpacity>
-                        <Spacer />
-                    </VStack>
-
-
+                            <Spacer />
+                        </VStack>
+                    </TouchableOpacity>
                 } keyExtractor={item => item.id} />
             </View>
 
