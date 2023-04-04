@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../Views/Home';
 import Post from '../Views/Post';
 import detaltes from '../Views/detalhes';
-import loading from '../Views/loading';
+import Loading from '../Views/loading';
 
 const Router = () => {
 
@@ -13,7 +13,7 @@ const Router = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='carregameto' >
-                <Stack.Screen name="carregameto" component={loading} options={{ headerShown: false }} />
+                <Stack.Screen name="carregameto" component={Loading} options={{ headerShown: false }} />
                 <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
                 {/* <Stack.Screen name="Detalhes" component={detaltes} /> */}
                 <Stack.Screen name="Post" component={Post} options={{ headerBlurEffect: true }} />
