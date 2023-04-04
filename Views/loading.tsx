@@ -6,22 +6,19 @@ const Loading = ({ navigation }) => {
 
     const fetchUserData = () => {
         var nado = "logado";
-        const info = AsyncStorage.setItem('logado', nado);
-        // navigation.navigate('Home');
-        console.log('fetchUserData');
+        const info = AsyncStorage.setItem('logado', nado)
+        navigation.navigate('Home')
     }
 
-    async function checkLoginStatus() {
+    async function checkLoginStatuse() {
         const token = await AsyncStorage.getItem('logado');
         if (token) {
-            // navigation.push('Home')
-            console.log('checkLoginStatus');
-
+            navigation.navigate('Home')
         }
     }
 
     useEffect(() => {
-        checkLoginStatus();
+        checkLoginStatuse();
     }, [])
 
 
@@ -45,8 +42,9 @@ const Loading = ({ navigation }) => {
                 </Center>
                 <Button style={{ alignSelf: 'center' }} onPress={fetchUserData}
                     position={'absolute'} bottom={50} shadow={'6'} width={"300"} bgColor={'blue.400'}>
-                    Get-Start
+                    Vamos começar
                 </Button>
+
             </View>
 
 
