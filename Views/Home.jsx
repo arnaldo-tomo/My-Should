@@ -114,40 +114,36 @@ const Home = ({ navigation }) => {
 
 
 
-            <ScrollView>
-
-                <View bgColor={'white'}>
 
 
-                    <FlatList data={getAll} renderItem={({ item }) =>
+            <View bgColor={'white'}>
+                <FlatList data={getAll} renderItem={({ item }) =>
+                    <VStack p={2}  >
+                        <TouchableOpacity onPress={() => navigation.navigate('Post', item)} >
 
+                            <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
 
-                        <VStack p={2}  >
-                            <TouchableOpacity onPress={() => navigation.navigate('Post', item)} >
+                                <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
+                                    <Stack flex="1" p="2" justifyContent="space-around">
+                                        <Stack space="2">
+                                            <Heading size="sm" ml="-1">
+                                                {item.should}
+                                            </Heading>
+                                            <Text fontWeight={'light'}>{item.created_at}</Text>
 
-                                <Box borderRadius={6} shadow={4} bgColor={'white'} py="2" borderRightColor={'black'} borderLeftWidth={4} >
-
-                                    <HStack p={1} fontWeight="400" alignItems="center" space={4} justify={'center'}>
-                                        <Stack flex="1" p="2" justifyContent="space-around">
-                                            <Stack space="2">
-                                                <Heading size="sm" ml="-1">
-                                                    {item.should}
-                                                </Heading>
-                                                <Text fontWeight={'light'}>{item.created_at}</Text>
-
-                                            </Stack>
                                         </Stack>
-                                    </HStack>
+                                    </Stack>
+                                </HStack>
 
-                                </Box>
-                            </TouchableOpacity>
-                            <Spacer />
-                        </VStack>
+                            </Box>
+                        </TouchableOpacity>
+                        <Spacer />
+                    </VStack>
 
 
-                    } keyExtractor={item => item.id} />
-                </View>
-            </ScrollView>
+                } keyExtractor={item => item.id} />
+            </View>
+
             <Fab shadow={'9'} onPress={() => onOpen()} renderInPortal={false} bottom={5} bgColor={'blue.400'}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="8" />} />
 
