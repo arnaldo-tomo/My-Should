@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Home from '../Views/Home';
 import Post from '../Views/Post';
 import detaltes from '../Views/detalhes';
