@@ -122,7 +122,7 @@ const Home = ({ navigation }) => {
                                             <Heading size="sm" ml="-1">
                                                 {item.should}
                                             </Heading>
-                                            <Text fontWeight={'light'}>{item.created_at}</Text>
+                                            <Text fontWeight={'normal'}>{item.created_at}</Text>
 
                                         </Stack>
                                     </Stack>
