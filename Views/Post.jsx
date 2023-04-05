@@ -13,7 +13,6 @@ export default function Post({ navigation, route }) {
     //getting route params
     const { id, should, lingauem, descricao } = route.params;
 
-
     function Example() {
         const {
             isOpen,
@@ -21,16 +20,18 @@ export default function Post({ navigation, route }) {
             onClose
         } = useDisclose();
 
-        useEffect(() => {
-
-        })
         return <>
-            <Button onPress={onOpen}>Actionsheet</Button>
+            {/* <Button onPress={onOpen}>Actionsheet</Button> */}
 
-            <Actionsheet isOpen={isOpen} onClose={onClose} disableOverlay>
+            <Actionsheet isOpen={onOpen} onClose={onClose} disableOverlay>
                 <Actionsheet.Content>
-                    <Actionsheet.Item>Option 1</Actionsheet.Item>
+                    <Actionsheet.Item>{should}</Actionsheet.Item>
                     <Actionsheet.Item>Option 2</Actionsheet.Item>
+                    <Actionsheet.Item>Option 3</Actionsheet.Item>
+                    <Actionsheet.Item>Option 3</Actionsheet.Item>
+                    <Actionsheet.Item>Option 3</Actionsheet.Item>
+                    <Actionsheet.Item>Option 3</Actionsheet.Item>
+                    <Actionsheet.Item>Option 3</Actionsheet.Item>
                     <Actionsheet.Item>Option 3</Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>
@@ -39,16 +40,7 @@ export default function Post({ navigation, route }) {
 
     return (
         <NativeBaseProvider>
-            <VStack bgcolor={'white'}>
-                <Box bgColor={'white'} height="full" top={'full'} borderRadius={12} width={'2xl'} >
-
-                    <Heading style={{ textAlign: 'justify' }} padding={'2'}>{should}</Heading>
-
-                </Box>
-
-            </VStack>
-
-            <Center flex={1} px="3">
+            <Center flex={1} px="2">
                 <Example />
             </Center>
         </NativeBaseProvider >
