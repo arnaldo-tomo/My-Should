@@ -1,6 +1,6 @@
 import {
     NativeBaseProvider, Text, HStack, Heading, FlatList,
-    VStack, Spacer, Box, Input, Badge, Fab, Icon, TextArea, Actionsheet, Center, Skeleton, Stack, Button, Pressable
+    VStack, Spacer, Box, Input, Badge, Fab, Icon, useDisclose, Actionsheet, Center, Skeleton, Stack, Button, Pressable
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { AntDesign, FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
@@ -13,6 +13,11 @@ const Home = ({ navigation }) => {
 
     const [getAll, SetGetAll] = useState(true);
 
+    const {
+        isOpen,
+        onOpen,
+        onClose
+    } = useDisclose();
 
     useEffect(() => {
 
@@ -28,6 +33,8 @@ const Home = ({ navigation }) => {
 
 
     }, [])
+
+
 
     return (
         <NativeBaseProvider>
@@ -57,13 +64,13 @@ const Home = ({ navigation }) => {
 
             <HStack p={2} justifyContent={'space-between'} bgColor={'white'}>
                 <VStack>
-                    <Badge // bg="red.400"
+                    <Badge  // bg="red.400"
                         colorScheme="danger" rounded="full" mb={-4} mr={-3} zIndex={1} variant="solid" alignSelf="flex-end" _text={{
                             fontSize: 12
                         }}>
                         5
                     </Badge>
-                    <Button borderRadius="14" mx={{
+                    <Button onPress={onOpen} borderRadius="14" mx={{
                         base: "auto",
                         md: 0
                     }} p="2" bg="blue.300" _text={{
@@ -138,7 +145,27 @@ const Home = ({ navigation }) => {
             < Fab shadow={'9'} renderInPortal={false} bottom={5} bgColor={'blue.400'}
                 icon={<Icon color="white" as={AntDesign} name="plus" size="8" />} />
 
-
+            <Actionsheet isOpen={isOpen} onClose={onClose} disableOverlay>
+                <Actionsheet.Content>
+                    <Actionsheet.Item>Option 1</Actionsheet.Item>
+                    <Actionsheet.Item>Option 2</Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                    <Actionsheet.Item></Actionsheet.Item>
+                </Actionsheet.Content>
+            </Actionsheet>
         </NativeBaseProvider >
     );
 }
