@@ -1,6 +1,6 @@
 const App = {
     nome: 'MyShould',
-    APIURL: 'http://192.168.4.54:8000/api/',
+    APIURL: 'http://192.168.43.101:8000/api/',
     versao: 'V01',
 
 }
