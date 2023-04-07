@@ -18,7 +18,7 @@ const Router = () => {
                 <Stack.Screen name="carregameto" component={Loading} options={{ headerShown: false }} />
                 <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
                 {/* <Stack.Screen name="Detalhes" component={detaltes} /> */}
-                <Stack.Screen name="Post" component={Post} options={{ headerBlurEffect: true }} />
+                <Stack.Screen name="Post" component={Post} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
