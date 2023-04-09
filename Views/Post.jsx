@@ -32,11 +32,7 @@ export default function Post({ navigation, route }) {
                     <Actionsheet.Item>Option 2</Actionsheet.Item>
                     <Actionsheet.Item></Actionsheet.Item>
                     <Actionsheet.Item></Actionsheet.Item>
-                    <Actionsheet.Item></Actionsheet.Item>
-                    <Actionsheet.Item></Actionsheet.Item>
-                    <Actionsheet.Item></Actionsheet.Item>
-                    <Actionsheet.Item></Actionsheet.Item>
-                    <Actionsheet.Item></Actionsheet.Item>
+            
                 </Actionsheet.Content>
             </Actionsheet>
         </>
